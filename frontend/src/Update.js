@@ -1,8 +1,7 @@
 import React from 'react';
-import './App.css';
 import UpdateMeme from './components/Meme/UpdateMeme';
 
-
+import './App.css';
 
 function Update() {
   const updateMemeHandler = async (memeCaption, memeUrl, memeId) => {

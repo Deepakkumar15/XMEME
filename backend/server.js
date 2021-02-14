@@ -3,9 +3,8 @@ const bodyParser = require('body-parser');
 
 const abc = require('./mongo');
 
-
 const app = express();
-
+const PORT = process.env.PORT || 8081;
 
 app.use(bodyParser.json());
 
@@ -22,13 +21,17 @@ app.use((req, res, next) => {
     next();
   });
   
-
+//TO GET ALL MEMES
 app.get('/memes', abc.getMemes);
 
+//TO CREATE/POST A NEW MEME
 app.post('/memes', abc.createMeme);
 
-app.patch('/memes/:id', abc.updateMemes) ;
+//TO UPDATE CAPTION OR URL OF MEME SPECIFIC id 
+app.patch('/memes/:id', abc.patchMeme) ;
 
+//TO GET DETAILS OF SPECIFIC MEME
 app.get('/memes/:id', abc.getMemeById) ;
 
-app.listen(8081);
+//SERVER LISTEN ON PORT
+app.listen(PORT);

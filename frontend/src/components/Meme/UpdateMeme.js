@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import  { Redirect, useParams } from 'react-router-dom' ;
+import useParams from 'react-router-dom' ;
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import './NewMeme.css';
-import { useHistory } from 'react-router-dom';
+import useHistory from 'react-router-dom';
 
+import './NewMeme.css';
 
 
 const UpdateMeme = props => {

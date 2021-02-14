@@ -1,10 +1,25 @@
 const MongoClient = require('mongodb').MongoClient;
-var ObjectID = require('mongodb').ObjectID;
+const ObjectID = require('mongodb').ObjectID;
 
+//MONGO DATABASE URL FOR CONNECTION 
 const url = 'mongodb+srv://deepak_15:11911026@cluster0.jsrz1.mongodb.net/memes_db?retryWrites=true&w=majority';
 
+/*
+CREATING MEME FROM REQUEST BODY DATA
+@PARAMS
+req.body = {
+  name : name of meme owner,
+  caption : caption for meme,
+  url : url of image
+}
+
+@RETURN
+{
+  id : id of new meme created
+}
+*/
 const createMeme = async (req, res, next) => {  
-    const newMeme = {
+  const newMeme = {
     "name" : req.body.name,
     "caption" : req.body.caption,
     "url" : req.body.url
@@ -22,13 +37,27 @@ const createMeme = async (req, res, next) => {
     return res.json({message: 'Could not store data.'});
   };
   
-  const resJson = {
-    id : newMeme._id
-  };
+  const resJson = {id : newMeme._id};
   
   res.json(resJson);
 };
 
+
+/*
+FETCHING ALL MEMES FROM DATABASE
+@PARAMS
+
+@RETURN
+ARRAY OF MEMES
+[
+  {
+    id 
+    name
+    caption
+    url 
+  }
+]
+*/
 const getMemes = async (req, res, next) => {
   const client = new MongoClient(url);
   let memes;
@@ -51,6 +80,21 @@ const getMemes = async (req, res, next) => {
   return res.json(memes);
 }
 
+
+/*
+FETCHING DETAILS OF SPECIFIC MEME BY ID OR 404 STATUS
+@PARAMS
+
+@RETURN
+MEME
+{
+  id 
+  name
+  caption
+  url 
+}
+
+*/
 const getMemeById = async (req, res, next) => {
   const client = new MongoClient(url);
   let meme;
@@ -78,7 +122,18 @@ const getMemeById = async (req, res, next) => {
   return res.json(meme);
 }
 
-const updateMemes = async (req, res, next) => {
+
+/*
+PATCH CAPTION OR URL OF SPECIFIC MEME BY ID
+@PARAMS
+req.body = {
+  caption : caption for meme,
+  url : url of image
+}
+@RETURN
+STATUS FOR SUCCESS
+*/
+const patchMeme = async (req, res, next) => {
   const client = new MongoClient(url) ;
   let updateMeme ;
 
@@ -106,4 +161,4 @@ const updateMemes = async (req, res, next) => {
 exports.createMeme = createMeme;
 exports.getMemes = getMemes;
 exports.getMemeById = getMemeById;
-exports.updateMemes = updateMemes;
+exports.patchMeme = patchMeme;

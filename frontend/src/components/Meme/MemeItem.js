@@ -1,7 +1,9 @@
 import React from 'react';
-import  { BrowserRouter as Router, Redirect, Route, Switch, NavLink} from 'react-router-dom';
-import './MemeItem.css';
+import NavLink from 'react-router-dom';
 import Button from '../Button/Button';
+
+import './MemeItem.css';
+
 
 const MemeItem = props => {
   return (

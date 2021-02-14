@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import NewMeme from './components/Meme/NewMeme';
 import MemeList from './components/Meme/MemeList';
+
 import './App.css';
 
 const url = 'http://localhost:8081' ;
+
 
 function Home() {
   const [loadedMemes, setLoadedMemes] = useState([]);
