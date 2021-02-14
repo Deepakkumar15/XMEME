@@ -69,7 +69,7 @@ const getMemes = async (req, res, next) => {
     client.close();
   } catch (error) {
     client.close();
-    return res.json({ message: 'Could not retrieve products.' });
+    return res.json({ message: 'Could not retrieve Meme.' });
   };
   
   memes.forEach((meme)=>{
@@ -140,12 +140,25 @@ const patchMeme = async (req, res, next) => {
   try{
     await client.connect() ;
     const myQuery = {_id : ObjectID(req.params.id)};
-
-    const newValues = { $set: {
-      "caption" : req.body.caption,
-      "url" : req.body.url
-    }} ;
-
+    let newValues = {};
+    
+    if(req.body.caption && req.body.url){
+      newValues = { $set: {
+        "caption" : req.body.caption,
+        "url" : req.body.url
+      }} ;
+    } 
+    if(req.body.caption){
+      newValues = { $set: {
+        "caption" : req.body.caption
+      }} ;
+    } 
+    if(req.body.url){
+      newValues = { $set: {
+        "url" : req.body.url
+      }} ;
+    }
+    
     const db = client.db("memes_db") ;
     updateMeme = await db.collection("memes").updateOne(myQuery, newValues) ;
     client.close();

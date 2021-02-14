@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 
 const abc = require('./mongo');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 const app = express();
 const PORT = process.env.PORT || 8081;
 
@@ -21,6 +24,13 @@ app.use((req, res, next) => {
     next();
   });
   
+
+//SWAGGER UI
+const swaggerApp = express()
+swaggerApp.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+swaggerApp.listen(8080);
+
+
 //TO GET ALL MEMES
 app.get('/memes', abc.getMemes);
 
