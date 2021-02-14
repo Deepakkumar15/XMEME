@@ -23,8 +23,12 @@ app.use((req, res, next) => {
   });
   
 
-app.get('/test1', abc.getMemes);
+app.get('/memes', abc.getMemes);
 
-app.post('/test2', abc.createMeme);
+app.post('/memes', abc.createMeme);
 
-app.listen(5000);
+app.patch('/memes/:id', abc.updateMemes) ;
+
+app.get('/memes/:id', abc.getMemeById) ;
+
+app.listen(8081);
