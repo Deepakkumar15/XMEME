@@ -1,22 +1,20 @@
 import React from 'react';
-import  { BrowserRouter as Router, Route } from 'react-router-dom' ;
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Update from './Update';
-import Home from './Home' ;
+import Home from './Home';
 
 const App = () => {
   return (
     <Router>
       <Header />
       <main>
-      <Route path="/" exact={true}>
-        <Home />
-      </Route>  
-      <Route path="/memes/:id" exact={true}>
-        <Update />
-      </Route>
-      </main>  
-    </Router>  
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/memes/:id" element={<Update />} />
+        </Routes>
+      </main>
+    </Router>
   );
 };
 
