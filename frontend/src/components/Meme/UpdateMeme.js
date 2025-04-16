@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import useParams from 'react-router-dom' ;
+import { useParams, useNavigate } from 'react-router-dom';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
-import useHistory from 'react-router-dom';
 
 import './NewMeme.css';
-
 
 const UpdateMeme = props => {
   const [enteredCaption, setEnteredCaption] = useState('');
   const [enteredUrl, setEnteredUrl] = useState('');
-  const { id }  = useParams() ;
-  const history = useHistory();
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const captionChangeHandler = event => {
     setEnteredCaption(event.target.value);
@@ -29,10 +27,9 @@ const UpdateMeme = props => {
     else{
       let hasError = await props.onUpdateMeme(enteredCaption, enteredUrl, id);
       if(!hasError){
-        history.push("/");
+        navigate("/");
       }
     }
-    
   };
 
   return (
